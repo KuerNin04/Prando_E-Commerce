@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="brand-panel">
+        <img src="UoTlogo.png" alt="School Logo" width="120" />
+        <h2>University of Technology</h2>
+    </div>
+
+    <form id="loginForm">
+
+        <h1>Student Schedules</h1>
+
+        <label for="studentid">ID Number</label>
+        <input type="text" id="studentid" placeholder="123456789" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" placeholder="Password" required />
+
+        <label style="display:inline-flex; align-items:center; font-weight:normal; font-size:13px; margin-top:8px;">
+            <input type="checkbox" onclick="togglePassword()" style="margin-right:6px;" /> Show Password
+        </label>
+
+        <p id="errorMsg" class="error"></p>
+
+        <input type="submit" value="Log In" />
+
+        <p style="margin-top:15px;"><a href="forgotpassword.html">Forgot Password?</a></p>
+        <p style="font-size:13px; color:#666;">Don't have an account? <a href="signup.html">Create Account</a></p>
+
+    </form>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form id="forgotForm">
+
+    <h1>Forgot Password</h1>
+    <p>Enter your ID Number and email address, we'll send you instructions to reset your password.</p>
+
+    <label for="studentid">ID Number</label>
+    <input type="text" id="studentid" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" required />
+
+    <p id="errorMsg" class="error"></p>
+
+    <input type="submit" value="Send Reset Link" />
+
+    <p style="margin-top:15px;"><a href="website1.html">Back to Log In</a></p>
+
+</form>
+
+<script src="forgot.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="UoTlogo.png" alt="Logo" width="60" />
+        <span>UoT Portal</span>
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li class="menu-group">
+            <div class="group-title" onclick="toggleSubmenu(this)">
+                <span>🎓 Student</span>
+                <span class="arrow">▾</span>
+            </div>
+            <ul class="submenu">
+                <li><a href="dashboard.html" class="active">🏠 Dashboard</a></li>
+                <li><a href="schedule.html">📅 Schedules</a></li>
+                <li><a href="grades.html">📊 Grades</a></li>
+                <li><a href="profile.html">👤 Profile</a></li>
+            </ul>
+        </li>
+
+        <li class="menu-group">
+            <div class="group-title" onclick="toggleSubmenu(this)">
+                <span>🛍️ College Store</span>
+                <span class="arrow">▾</span>
+            </div>
+            <ul class="submenu">
+                <li><a href="idlace.html">🪪 ID Lace</a></li>
+                <li><a href="tshirt.html">👕 College T-Shirt</a></li>
+                <li><a href="peuniform.html">🩳 PE Uniform</a></li>
+                <li><a href="uniform.html">👔 Uniforms</a></li>
+            </ul>
+        </li>
+
+        <li class="menu-group single">
+            <a href="#" onclick="logout()">🚪 Log Out</a>
+        </li>
+
+    </ul>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<div class="page-content">
+    <h1>Welcome back!</h1>
+    <p>This is your student dashboard.</p>
+</div>
+
+<script src="sidebar.js"></script>
+</body>
+</html>
