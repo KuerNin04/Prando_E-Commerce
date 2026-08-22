@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categories | UoT Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../UoTlogo.png" alt="Logo" width="36" />
+            <span>UoT Portal</span>
+        </div>
+        <ul class="sidebar-menu">
+        <li class="menu-group">
+            <div class="group-title" onclick="toggleSubmenu(this)">
+                <span>🎓 Student</span>
+                <span class="arrow">▾</span>
+            </div>
+            <ul class="submenu">
+                <li><a href="../dashboard.html">🏠 Home</a></li>
+                <li><a href="profile.html">👤 Profile</a></li>
+                <li><a href="settings.html">⚙️ Settings</a></li>
+            </ul>
+        </li>
+        <li class="menu-group">
+            <div class="group-title" onclick="toggleSubmenu(this)">
+                <span>🛍️ College Store</span>
+                <span class="arrow">▾</span>
+            </div>
+            <ul class="submenu">
+                <li><a href="products.html">🛒 Products</a></li>
+                <li><a href="categories.html">🗂️ Categories</a></li>
+            </ul>
+        </li>
+        <li class="menu-group">
+            <div class="group-title" onclick="toggleSubmenu(this)">
+                <span>🧾 Shopping</span>
+                <span class="arrow">▾</span>
+            </div>
+            <ul class="submenu">
+                <li><a href="cart.html">🛒 Cart</a></li>
+                <li><a href="myorders.html">📦 My Orders</a></li>
+                <li><a href="wishlist.html">❤️ Wishlist</a></li>
+            </ul>
+        </li>
+        <li class="menu-group single">
+            <a href="#" onclick="logout()">🚪 Log Out</a>
+        </li>
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <main class="page-content">
+        <header class="content-header">
+            <h1>Categories</h1>
+            <p class="subtitle">Browse products by type.</p>
+        </header>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-thumb">👔</div>
+                <h4>Uniforms</h4>
+                <p class="card-desc">PE uniforms, prescribed uniforms, and departmental attire.</p>
+            </div>
+            <div class="card">
+                <div class="card-thumb">🪪</div>
+                <h4>ID &amp; Accessories</h4>
+                <p class="card-desc">ID laces, holders, and student accessories.</p>
+            </div>
+            <div class="card">
+                <div class="card-thumb">👕</div>
+                <h4>Apparel</h4>
+                <p class="card-desc">College shirts, jackets, and casual wear.</p>
+            </div>
+        </div>
+
+    </main>
+
+<script src="../sidebar.js"></script>
+</body>
+</html>

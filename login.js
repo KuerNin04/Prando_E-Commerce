@@ -9,7 +9,6 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         errorMsg.textContent = "Please fill in both ID Number and Password.";
     } else {
         errorMsg.textContent = "";
-        alert("Login Successful!");
         window.location.href = "dashboard.html";
     }
 });
