@@ -1,12 +1,3 @@
-/* ============================================
-   Sidebar & Page Interactions
-   Matches classes in style.css:
-   .sidebar / .sidebar.open
-   .menu-group.active  (controls .arrow rotation + .submenu max-height)
-   .overlay / .overlay.show
-   ============================================ */
-
-// Open/close the whole sidebar (hamburger button + overlay)
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
@@ -15,33 +6,27 @@ function toggleSidebar() {
     if (overlay) overlay.classList.toggle('show');
 }
 
-// Expand/collapse a menu group when its title is clicked.
-// "groupTitleEl" is the .group-title div; its parent <li> is .menu-group
 function toggleSubmenu(groupTitleEl) {
-    const group = groupTitleEl.parentElement; // the <li class="menu-group">
+    const group = groupTitleEl.parentElement;
     if (!group) return;
     group.classList.toggle('active');
 }
 
-// Logout confirmation
 function logout() {
     redirectToLogin();
 }
 
-// Works whether this page is at the root (dashboard.html) or inside pages/
 function redirectToLogin() {
     const insidePagesFolder = window.location.pathname.includes('/pages/');
     window.location.href = insidePagesFolder ? '../website.html' : 'website.html';
 }
 
-// Highlight the current page's link as active, and auto-expand its group
 (function highlightActiveLink() {
     const currentFile = window.location.pathname.split('/').pop() || 'dashboard.html';
     document.querySelectorAll('.submenu li a').forEach(link => {
         const linkFile = (link.getAttribute('href') || '').split('/').pop();
         if (linkFile === currentFile) {
             link.classList.add('active');
-            // auto-open the group this link belongs to
             const group = link.closest('.menu-group');
             if (group) group.classList.add('active');
         } else {
@@ -50,7 +35,6 @@ function redirectToLogin() {
     });
 })();
 
-// Add to Cart button interaction (Home + Products pages)
 document.querySelectorAll('.btn-outline').forEach(btn => {
     if (btn.textContent.trim() === 'Add to Cart') {
         btn.addEventListener('click', () => {
