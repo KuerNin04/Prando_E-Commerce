@@ -328,12 +328,6 @@ a:hover {
     }
 }
 
-/* ============================================
-   Added: Page content components
-   (products, cart, orders, profile, settings)
-   Matches existing blue gradient + Poppins/Playfair theme
-   ============================================ */
-
 .page-content h1 {
     color: white;
 }
@@ -351,7 +345,6 @@ a:hover {
     margin: 30px 0 14px;
 }
 
-/* Hero banner on Home */
 .feature-banner {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
@@ -381,7 +374,6 @@ a:hover {
     max-width: 400px;
 }
 
-/* Buttons for page content (cards, cart, etc.) */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -412,7 +404,7 @@ a:hover {
 
 .btn-block { width: 100%; }
 
-/* Card grid (Products, Categories, Wishlist) */
+
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -458,7 +450,6 @@ a:hover {
     color: white;
 }
 
-/* Cart page */
 .cart-list { display: flex; flex-direction: column; gap: 12px; }
 .cart-item {
     display: grid;
@@ -499,7 +490,6 @@ a:hover {
 }
 .cart-total { color: #0072ff; }
 
-/* My Orders */
 .order-list { display: flex; flex-direction: column; gap: 12px; }
 .order-card {
     background: white;
@@ -559,7 +549,6 @@ a:hover {
 .detail-row:last-child { border-bottom: none; }
 .detail-label { color: #888; }
 
-/* Settings */
 .settings-list { display: flex; flex-direction: column; gap: 12px; max-width: 500px; }
 .settings-block {
     background: white;
@@ -570,7 +559,6 @@ a:hover {
 .settings-block h4 { margin: 0 0 4px; font-size: 14.5px; color: #222; }
 .settings-block p { margin: 0 0 12px; color: #777; font-size: 13px; }
 
-/* Logout page */
 .logout-box {
     background: white;
     border-radius: 16px;
