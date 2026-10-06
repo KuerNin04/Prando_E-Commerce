@@ -13,7 +13,8 @@ function toggleSubmenu(groupTitleEl) {
 }
 
 function logout() {
-    redirectToLogin();
+    const insidePagesFolder = window.location.pathname.includes('/pages/');
+    window.location.href = insidePagesFolder ? 'logout.html' : 'pages/logout.html';
 }
 
 function redirectToLogin() {
@@ -21,6 +22,7 @@ function redirectToLogin() {
     window.location.href = insidePagesFolder ? '../website.html' : 'website.html';
 }
 
+// Highlight the sidebar link matching the current page and open its group.
 (function highlightActiveLink() {
     const currentFile = window.location.pathname.split('/').pop() || 'dashboard.html';
     document.querySelectorAll('.submenu li a').forEach(link => {
@@ -35,13 +37,18 @@ function redirectToLogin() {
     });
 })();
 
-document.querySelectorAll('.btn-outline').forEach(btn => {
-    if (btn.textContent.trim() === 'Add to Cart') {
-        btn.addEventListener('click', () => {
+// "Add to Cart" / "Move to Cart" buttons — matched by text so it works
+// whether the button uses .btn-primary or .btn-outline.
+document.querySelectorAll('.btn').forEach(btn => {
+    const label = btn.textContent.trim();
+
+    if (label === 'Add to Cart') {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const card = btn.closest('.card');
             const name = card ? card.querySelector('h4').textContent : 'Item';
             const original = btn.textContent;
-            btn.textContent = 'Added ✓';
+            btn.textContent = 'Added \u2713';
             btn.disabled = true;
             showToast(`${name} added to cart`);
             setTimeout(() => {
@@ -51,8 +58,9 @@ document.querySelectorAll('.btn-outline').forEach(btn => {
         });
     }
 
-    if (btn.textContent.trim() === 'Move to Cart') {
-        btn.addEventListener('click', () => {
+    if (label === 'Move to Cart') {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const card = btn.closest('.card');
             const name = card ? card.querySelector('h4').textContent : 'Item';
             showToast(`${name} moved to cart`);
@@ -60,23 +68,14 @@ document.querySelectorAll('.btn-outline').forEach(btn => {
     }
 });
 
-// Checkout button (Cart page)
 const checkoutBtn = document.querySelector('.cart-summary .btn-primary');
 if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', () => {
+    checkoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         showToast('Order placed! Check My Orders for status.');
     });
 }
 
-// Logout button on the Logout page itself (id="logoutBtn")
-const logoutBtn = document.getElementById('logoutBtn');
-if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-        redirectToLogin();
-    });
-}
-
-// Small toast/confirmation popup used above
 function showToast(message) {
     let toast = document.getElementById('appToast');
     if (!toast) {
@@ -105,3 +104,45 @@ function showToast(message) {
         toast.style.opacity = '0';
     }, 2200);
 }
+
+const logoutModal = document.getElementById('logoutModal');
+const logoutButton = document.getElementById('logoutBtn');
+const cancelLogoutButton = document.getElementById('cancelLogout');
+const confirmLogoutButton = document.getElementById('confirmLogout');
+
+if (logoutModal && logoutButton && cancelLogoutButton && confirmLogoutButton) {
+    const closeLogoutModal = () => {
+        logoutModal.classList.remove('show');
+        logoutModal.setAttribute('aria-hidden', 'true');
+        logoutButton.focus();
+    };
+
+    logoutButton.addEventListener('click', () => {
+        logoutModal.classList.add('show');
+        logoutModal.setAttribute('aria-hidden', 'false');
+        confirmLogoutButton.focus();
+    });
+
+    cancelLogoutButton.addEventListener('click', closeLogoutModal);
+    confirmLogoutButton.addEventListener('click', redirectToLogin);
+
+    logoutModal.addEventListener('click', (event) => {
+        if (event.target === logoutModal) closeLogoutModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && logoutModal.classList.contains('show')) {
+            closeLogoutModal();
+        }
+    });
+}
+
+const menuToggle = document.querySelector('.menu-toggle');
+if (menuToggle && !menuToggle.hasAttribute('onclick')) {
+    menuToggle.addEventListener('click', toggleSidebar);
+}
+document.querySelectorAll('.group-title').forEach((groupTitle) => {
+    if (!groupTitle.hasAttribute('onclick')) {
+        groupTitle.addEventListener('click', () => toggleSubmenu(groupTitle));
+    }
+});

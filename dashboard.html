@@ -1,105 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Home | UoT Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - School Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="portal-page">
 
-<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="UoTlogo.png" alt="Logo" width="36" />
-            <span>UoT Portal</span>
-        </div>
-        <ul class="sidebar-menu">
-        <li class="menu-group">
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="UoTlogo.png" alt="University of Technology logo" width="36">
+        <span>UoT Portal</span>
+    </div>
+    <ul class="sidebar-menu">
+        <li class="menu-group active">
             <div class="group-title" onclick="toggleSubmenu(this)">
-                <span>🎓 Student</span>
-                <span class="arrow">▾</span>
+                Student <span class="arrow">&#9660;</span>
             </div>
             <ul class="submenu">
-                <li><a href="dashboard.html">🏠 Home</a></li>
-                <li><a href="pages/profile.html">👤 Profile</a></li>
-                <li><a href="pages/settings.html">⚙️ Settings</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="pages/profile.html">Profile</a></li>
+                <li><a href="pages/settings.html">Settings</a></li>
             </ul>
         </li>
         <li class="menu-group">
             <div class="group-title" onclick="toggleSubmenu(this)">
-                <span>🛍️ College Store</span>
-                <span class="arrow">▾</span>
+                College Store <span class="arrow">&#9660;</span>
             </div>
             <ul class="submenu">
-                <li><a href="pages/products.html">🛒 Products</a></li>
-                <li><a href="pages/categories.html">🗂️ Categories</a></li>
+                <li><a href="pages/products.html">Products</a></li>
+                <li><a href="pages/categories.html">Categories</a></li>
             </ul>
         </li>
         <li class="menu-group">
             <div class="group-title" onclick="toggleSubmenu(this)">
-                <span>🧾 Shopping</span>
-                <span class="arrow">▾</span>
+                Shopping <span class="arrow">&#9660;</span>
             </div>
             <ul class="submenu">
-                <li><a href="pages/cart.html">🛒 Cart</a></li>
-                <li><a href="pages/myorders.html">📦 My Orders</a></li>
-                <li><a href="pages/wishlist.html">❤️ Wishlist</a></li>
+                <li><a href="pages/cart.html">Cart</a></li>
+                <li><a href="pages/myorders.html">My Orders</a></li>
+                <li><a href="pages/wishlist.html">Wishlist</a></li>
             </ul>
         </li>
         <li class="menu-group single">
-            <a href="#" onclick="logout()">🚪 Log Out</a>
+            <a href="pages/logout.html">Log Out</a>
         </li>
-        </ul>
+    </ul>
+</div>
+
+<div class="page-content">
+    <div class="content-header">
+        <h1>Welcome back, Student</h1>
+        <p class="subtitle">Here's what's happening with your account today.</p>
     </div>
 
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="feature-banner">
+        <span class="eyebrow">This Semester</span>
+        <h2>Find what you need for campus</h2>
+        <p>Browse official products, review your cart, and keep track of your orders in one place.</p>
+        <a href="pages/products.html" class="btn btn-primary">Browse Store</a>
+    </div>
 
-    <main class="page-content">
-        <header class="content-header">
-            <h1>Welcome back, Juan!</h1>
-            <p class="subtitle">Your one-stop shop for official TAU gear and student essentials.</p>
-        </header>
+    <div class="section-title">Quick Overview</div>
+    <div class="promo-strip">
+        <div class="promo-item tag-academics">
+            <span class="promo-tag">Academics</span>
+            Next class: 1:00 PM — Data Structures
+        </div>
+        <div class="promo-item tag-academics">
+            <span class="promo-tag">Academics</span>
+            2 pending clearance items
+        </div>
+        <div class="promo-item tag-store">
+            <span class="promo-tag">Store</span>
+            Store order arriving this week
+        </div>
+        <div class="promo-item tag-academics">
+            <span class="promo-tag">Academics</span>
+            Attendance rate: 96%
+        </div>
+        <div class="promo-item tag-notify">
+            <span class="promo-tag">Notification</span>
+            1 unread announcement
+        </div>
+    </div>
 
-        <section class="feature-banner">
-            <span class="eyebrow">New Arrival</span>
-            <h2>2025 PE Uniform Set is here</h2>
-            <p>Grab the newest set before classes start. Limited sizes available.</p>
-            <a href="pages/products.html" class="btn btn-primary">Shop Products</a>
-        </section>
-
-        <h3 class="section-title">Featured Products</h3>
+    <div class="section-title">This Week's Snapshot</div>
+    <div class="stats-panel">
         <div class="card-grid">
             <div class="card">
-                <div class="card-thumb">🪪</div>
-                <h4>ID Lace</h4>
-                <p class="price">₱75.00</p>
-                <button class="btn btn-outline">Add to Cart</button>
+                <p class="card-desc metric-label">Units Enrolled</p>
+                <p class="price metric-value">6</p>
             </div>
             <div class="card">
-                <div class="card-thumb">👕</div>
-                <h4>College T-Shirt</h4>
-                <p class="price">₱350.00</p>
-                <button class="btn btn-outline">Add to Cart</button>
+                <p class="card-desc metric-label">Average Grade</p>
+                <p class="price metric-value">1.75</p>
             </div>
             <div class="card">
-                <div class="card-thumb">🩳</div>
-                <h4>PE Uniform</h4>
-                <p class="price">₱650.00</p>
-                <button class="btn btn-outline">Add to Cart</button>
+                <p class="card-desc metric-label">Classes Today</p>
+                <p class="price metric-value">3</p>
+            </div>
+            <div class="card">
+                <p class="card-desc metric-label">Clearance Status</p>
+                <p class="price metric-value">80%</p>
             </div>
         </div>
+    </div>
 
-        <h3 class="section-title">Promotions</h3>
-        <div class="promo-strip">
-            <div class="promo-item">🎉 Freshmen Bundle — save 10% on ID Lace + T-Shirt</div>
-            <div class="promo-item">📦 Free campus pickup on orders over ₱500</div>
+    <div class="section-title">Student Tools</div>
+    <div class="card-grid">
+
+        <div class="card">
+            <div class="card-thumb">
+                <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Z" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 3v4M16 3v4M3 9h18" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4>Products</h4>
+            <p class="card-desc">Browse official campus gear and supplies.</p>
+            <a href="pages/products.html" class="btn btn-outline btn-block">Open</a>
         </div>
 
-    </main>
+        <div class="card">
+            <div class="card-thumb">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5V6a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v14.5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 17h12" stroke-width="1.8" stroke-linecap="round"/><path d="M6 21a2 2 0 0 1 0-4h12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>Cart</h4>
+            <p class="card-desc">Review your selected items before checkout.</p>
+            <a href="pages/cart.html" class="btn btn-outline btn-block">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="card-thumb">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4>Profile</h4>
+            <p class="card-desc">Manage your personal information.</p>
+            <a href="pages/profile.html" class="btn btn-outline btn-block">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="card-thumb">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4" stroke-width="1.6"/><circle cx="17" cy="20" r="1.4" stroke-width="1.6"/><path d="M3 4h2l2.2 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>Wishlist</h4>
+            <p class="card-desc">Keep track of products you may want later.</p>
+            <a href="pages/wishlist.html" class="btn btn-outline btn-block">Open</a>
+        </div>
+
+    </div>
+
+    <div class="section-title">Recent Activity</div>
+    <div class="order-list">
+        <div class="order-card">
+            <div class="order-top">
+                <span class="order-number">Grade Posted — Data Structures</span>
+                <span class="status status-completed">Updated</span>
+            </div>
+            <p class="order-total activity-copy">Your instructor posted a new grade for Midterm Exam 2.</p>
+        </div>
+        <div class="order-card">
+            <div class="order-top">
+                <span class="order-number">Clearance — Library</span>
+                <span class="status status-pending">Pending</span>
+            </div>
+            <p class="order-total activity-copy">Waiting for approval from the library office.</p>
+        </div>
+        <div class="order-card">
+            <div class="order-top">
+                <span class="order-number">Store Order #1042</span>
+                <span class="status status-completed">Ready for Pickup</span>
+            </div>
+            <p class="order-total activity-copy">Your PE Uniform order is ready at the college store.</p>
+        </div>
+    </div>
+</div>
 
 <script src="sidebar.js"></script>
+
 </body>
 </html>
