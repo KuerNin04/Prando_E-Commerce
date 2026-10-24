@@ -1,15 +1,20 @@
-document.getElementById("forgotForm").addEventListener("submit", function (event) {
+const forgotForm = document.getElementById("forgotForm");
+const isSellerRecovery = new URLSearchParams(window.location.search).get("account") === "seller";
+
+if (isSellerRecovery) {
+    document.getElementById("forgotTitle").textContent = "Seller Password Help";
+    document.getElementById("forgotDescription").textContent = "Enter the email address linked to your seller account.";
+    document.getElementById("studentIdField").hidden = true;
+    document.getElementById("studentid").required = false;
+    document.getElementById("forgotSubmit").value = "Request Help";
+    document.getElementById("backToLogin").href = "website.html?account=seller";
+}
+
+forgotForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const studentid = document.getElementById("studentid").value;
-    const email = document.getElementById("email").value;
     const errorMsg = document.getElementById("errorMsg");
-
-    if (studentid === "" || email === "") {
-        errorMsg.textContent = "Please fill in both ID Number and Email.";
-    } else {
-        errorMsg.textContent = "";
-        alert("Reset instructions sent to " + email);
-        window.location.href = "website1.html";
-    }
+    errorMsg.textContent = isSellerRecovery
+        ? "Seller password recovery is not connected yet. Contact your portal administrator."
+        : "Password recovery is not connected yet. Contact your portal administrator.";
 });

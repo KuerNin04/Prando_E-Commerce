@@ -50,7 +50,7 @@
             </ul>
         </li>
         <li class="menu-group single">
-            <a href="#" onclick="logout()"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
+                    <a href="#" onclick="logout(); return false;"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
         </li>
     </ul>
 </div>
@@ -62,25 +62,11 @@
             <h1>Wishlist</h1>
             <p class="subtitle">Items you've saved for later.</p>
         </header>
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-thumb"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-                <h4>Uniform Set</h4>
-                <p class="card-desc">Top and bottom, size Medium.</p>
-                <p class="price">₱800.00</p>
-                <a href="#" class="btn btn-outline btn-block">Move to Cart</a>
-            </div>
-            <div class="card">
-                <div class="card-thumb"><svg viewBox="0 0 24 24"><path d="M8 4 4 7l2 3 2-1v10h8V9l2 1 2-3-4-3-2 2-2-2Z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-                <h4>College T-shirt</h4>
-                <p class="card-desc">Size Large.</p>
-                <p class="price">₱350.00</p>
-                <a href="#" class="btn btn-outline btn-block">Move to Cart</a>
-            </div>
-        </div>
+        <div class="card-grid" id="wishlist-list" aria-live="polite"></div>
 
     </main>
 
 <script src="../sidebar.js"></script>
+<script src="../student-store.js"></script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-B5jNofEK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DPpiL02l.css">
+</head>
+<body class="auth-page">
+
+<form id="signupForm">
+
+    <h1>Create Account</h1>
+
+    <label for="fullname">Full Name</label>
+    <input type="text" id="fullname" required />
+
+    <label for="studentid">ID Number</label>
+    <input type="text" id="studentid" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+
+    <label for="age">Age</label>
+    <input type="number" id="age" min="10" max="100" required />
+
+    <label for="course">Course</label>
+    <input type="text" id="course" required />
+
+   <label for="pwd">Password</label>
+    <input type="password" id="pwd" required />
+
+    <label style="display:inline-flex; align-items:center; font-weight:normal; font-size:13px; margin-top:8px;">
+        <input type="checkbox" onclick="togglePassword()" style="margin-right:6px;" /> Show Password
+    </label>
+
+    <label for="confirmpwd">Confirm Password</label>
+    <input type="password" id="confirmpwd" required />
+
+    <label style="display:inline-flex; align-items:center; font-weight:normal; font-size:13px; margin-top:8px;">
+        <input type="checkbox" onclick="toggleConfirmPassword()" style="margin-right:6px;" /> Show Password
+    </label>
+
+    <p id="errorMsg" class="error"></p>
+
+    <input type="submit" value="Create Account" />
+
+    <p style="margin-top:15px;">Already have an account? <a href="website.html">Log In</a></p>
+
+</form>
+
+<script src="signup.js"></script>
+</body>
+</html>

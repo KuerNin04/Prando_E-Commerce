@@ -9,24 +9,25 @@
 
 <form id="forgotForm">
 
-    <h1>Forgot Password</h1>
-    <p>Enter your ID Number and email address, we'll send you instructions to reset your password.</p>
+    <h1 id="forgotTitle">Forgot Password</h1>
+    <p id="forgotDescription">Enter your ID Number and email address to request password reset help.</p>
 
-    <label for="studentid">ID Number</label>
-    <input type="text" id="studentid" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+    <div id="studentIdField">
+        <label for="studentid">ID Number</label>
+        <input type="text" id="studentid" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+    </div>
 
     <label for="email">Email Address</label>
     <input type="email" id="email" required />
 
     <p id="errorMsg" class="error"></p>
 
-    <input type="submit" value="Send Reset Link" />
+    <input type="submit" id="forgotSubmit" value="Request Reset Help" />
 
-    <p style="margin-top:15px;"><a href="website.html">Back to Log In</a></p>
+    <p style="margin-top:15px;"><a id="backToLogin" href="website.html">Back to Log In</a></p>
 
 </form>
 
 <script src="forgot.js"></script>
-
 </body>
 </html>

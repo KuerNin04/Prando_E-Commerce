@@ -9,7 +9,7 @@
 </head>
 <body class="portal-page">
 
-<button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+<button class="menu-toggle" id="studentMenuToggle" onclick="toggleSidebar()" aria-label="Open student navigation" aria-expanded="false">&#9776;</button>
 
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -50,7 +50,7 @@
             </ul>
         </li>
         <li class="menu-group single">
-            <a href="#" onclick="logout()"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
+                    <a href="#" onclick="logout(); return false;"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
         </li>
     </ul>
 </div>
@@ -63,37 +63,19 @@
             <p class="subtitle">Review your items before checking out.</p>
         </header>
 
-        <div class="cart-list">
-            <div class="cart-item">
-                <div class="cart-thumb"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.6"/><path d="M12 8.4v5.6M8 12l4-2 4 2M9 20l3-5.5L15 20" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <div class="cart-info">
-                    <h4>PE Uniform</h4>
-                    <p>Size: Medium</p>
-                </div>
-                <div class="cart-qty">Qty: 1</div>
-                <div class="cart-price">₱650.00</div>
-            </div>
-            <div class="cart-item">
-                <div class="cart-thumb"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" stroke-width="1.6"/><circle cx="12" cy="9" r="2.3" stroke-width="1.6"/><path d="M8 17h8" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-                <div class="cart-info">
-                    <h4>ID Lace</h4>
-                    <p>Color: Green</p>
-                </div>
-                <div class="cart-qty">Qty: 2</div>
-                <div class="cart-price">₱150.00</div>
-            </div>
-        </div>
+        <div class="cart-list" id="cart-list" aria-live="polite"></div>
 
         <div class="cart-summary">
             <div class="cart-total-row">
                 <span>Total</span>
-                <span class="cart-total">₱800.00</span>
+                <span class="cart-total" id="cart-total">₱0.00</span>
             </div>
-            <button class="btn btn-primary btn-block">Checkout</button>
+            <button class="btn btn-primary btn-block" type="button" id="checkout-button" data-checkout disabled>Checkout</button>
         </div>
 
     </main>
 
 <script src="../sidebar.js"></script>
+<script src="../student-store.js"></script>
 </body>
 </html>

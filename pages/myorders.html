@@ -50,7 +50,7 @@
             </ul>
         </li>
         <li class="menu-group single">
-            <a href="#" onclick="logout()"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
+                    <a href="#" onclick="logout(); return false;"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l5-5-5-5M21 12H9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Log Out</a>
         </li>
     </ul>
 </div>
@@ -62,32 +62,11 @@
             <h1>My Orders</h1>
             <p class="subtitle">Track your college store orders.</p>
         </header>
-        <div class="order-list">
-            <div class="order-card">
-                <div class="order-top">
-                    <span class="order-number">Order #1042</span>
-                    <span class="status status-completed">Ready for Pickup</span>
-                </div>
-                <p class="order-total">₱650.00</p>
-            </div>
-            <div class="order-card">
-                <div class="order-top">
-                    <span class="order-number">Order #1039</span>
-                    <span class="status status-pending">Processing</span>
-                </div>
-                <p class="order-total">₱150.00</p>
-            </div>
-            <div class="order-card">
-                <div class="order-top">
-                    <span class="order-number">Order #1021</span>
-                    <span class="status status-cancelled">Cancelled</span>
-                </div>
-                <p class="order-total">₱350.00</p>
-            </div>
-        </div>
+        <div class="order-list" id="student-orders" aria-live="polite"></div>
 
     </main>
 
 <script src="../sidebar.js"></script>
+<script src="../student-store.js"></script>
 </body>
 </html>

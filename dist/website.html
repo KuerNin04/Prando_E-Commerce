@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-B5jNofEK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DPpiL02l.css">
+</head>
+<body class="auth-page">
+
+<div class="container" style="position:relative;">
+
+    <button type="button" id="sellerSwitchBtn" class="seller-switch-button" aria-label="Switch to seller sign-in" title="Seller sign-in"
+            style="position:absolute; top:12px; right:12px; width:40px; height:40px; padding:0; cursor:pointer;">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 3l4 4-4 4"></path>
+            <path d="M4 7h16"></path>
+            <path d="M8 21l-4-4 4-4"></path>
+            <path d="M4 17h16"></path>
+        </svg>
+    </button>
+
+    <div class="brand-panel">
+        <img src="/assets/UoTlogo-DIDB5NdE.png" alt="School Logo" width="120" />
+        <h2>University of Technology</h2>
+    </div>
+
+    <form id="loginForm">
+
+
+        <h1>Welcome,Student Sign In</h1>
+
+        <label for="studentid">Number</label>
+        <input type="text" id="studentid" placeholder="123456789" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" placeholder="Password" required />
+
+        <label style="display:inline-flex; align-items:center; font-weight:normal; font-size:13px; margin-top:8px;">
+            <input type="checkbox" onclick="togglePassword()" style="margin-right:6px;" /> Show Password
+        </label>
+
+        <p id="errorMsg" class="error"></p>
+
+        <input type="submit" value="Log In" />
+
+        <p style="margin-top:15px;"><a href="forgotpass.html">Forgot Password?</a></p>
+        <p style="font-size:13px; color:#666;">Don't have an account? <a href="signup.html">Create Account</a></p>
+
+    </form>
+
+    <form id="sellerForm" hidden>
+
+        <h1>Store Sign In</h1>
+
+        <label for="sellerId">Number</label>
+        <input type="text" id="sellerId" placeholder="123456789" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" autocomplete="username" required />
+
+        <label for="sellerPwd">Password</label>
+        <input type="password" id="sellerPwd" placeholder="Password" autocomplete="current-password" required />
+
+        <label class="password-toggle">
+            <input type="checkbox" id="showSellerPassword" /> Show Password
+        </label>
+
+        <p id="sellerErrorMsg" class="error" role="status" aria-live="polite"></p>
+        <input type="submit" value="Sign In" />
+
+        <p class="auth-link"><a href="forgotpass.html?account=seller">Forgot Password?</a></p>
+        <p class="auth-secondary">New seller? <a href="seller-signup.html">Create a Seller Account</a></p>
+        <p class="auth-note">Demo sign-in: any valid 9-digit ID and password opens the seller workspace.</p>
+
+    </form>
+
+    <dialog id="sellerConfirmDialog" class="seller-confirm-dialog" aria-labelledby="sellerConfirmTitle">
+        <h2 id="sellerConfirmTitle">Switch to seller sign-in?</h2>
+        <p>Use this option to sign in with your seller account.</p>
+        <div class="dialog-actions">
+            <button type="button" id="confirmSellerSwitch" class="dialog-confirm">Yes, switch</button>
+            <button type="button" id="cancelSellerSwitch" class="dialog-cancel">No, stay here</button>
+        </div>
+    </dialog>
+
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

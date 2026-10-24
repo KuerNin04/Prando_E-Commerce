@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-B5jNofEK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DPpiL02l.css">
+</head>
+<body class="auth-page">
+
+<form id="forgotForm">
+
+    <h1 id="forgotTitle">Forgot Password</h1>
+    <p id="forgotDescription">Enter your ID Number and email address to request password reset help.</p>
+
+    <div id="studentIdField">
+        <label for="studentid">ID Number</label>
+        <input type="text" id="studentid" pattern="[0-9]{9}" inputmode="numeric" maxlength="9" required />
+    </div>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" required />
+
+    <p id="errorMsg" class="error"></p>
+
+    <input type="submit" id="forgotSubmit" value="Request Reset Help" />
+
+    <p style="margin-top:15px;"><a id="backToLogin" href="website.html">Back to Log In</a></p>
+
+</form>
+
+<script src="forgot.js"></script>
+</body>
+</html>

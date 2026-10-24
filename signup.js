@@ -16,7 +16,7 @@ document.getElementById("signupForm").addEventListener("submit", function (event
     } else {
         errorMsg.textContent = "";
         alert("Account created successfully!");
-        window.location.href = "website1.html";
+        window.location.href = "website.html";
     }
 });
 

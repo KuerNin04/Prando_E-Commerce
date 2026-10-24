@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Merchandise | UoT Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-B5jNofEK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DPpiL02l.css">
+</head>
+<body class="portal-page">
+<button class="menu-toggle" id="studentMenuToggle" onclick="toggleSidebar()" aria-label="Open student navigation" aria-expanded="false">&#9776;</button>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header"><img src="/assets/UoTlogo-DIDB5NdE.png" alt="Logo" width="36" /><span>UoT Portal</span></div>
+    <ul class="sidebar-menu">
+        <li class="menu-group"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">Student</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="../dashboard.html">Home</a></li><li><a href="profile.html">Profile</a></li><li><a href="settings.html">Settings</a></li></ul></li>
+        <li class="menu-group active"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">College Store</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="products.html">Products</a></li><li><a href="categories.html">Categories</a></li></ul></li>
+        <li class="menu-group"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">Shopping</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="cart.html">Cart</a></li><li><a href="myorders.html">My Orders</a></li><li><a href="wishlist.html">Wishlist</a></li></ul></li>
+        <li class="menu-group single"><a href="#" onclick="logout(); return false;">Log Out</a></li>
+    </ul>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<main class="page-content">
+    <header class="content-header"><h1>Merchandise</h1><p class="subtitle">College apparel, accessories, and keepsakes.</p></header>
+    <div class="card-grid">
+        <article class="card" data-product-id="merch-school-id-lace" data-category="Merchandise" data-price="150"><div class="card-thumb" aria-hidden="true">ID</div><h4>School ID Lace</h4><p class="card-desc">School ID lace.</p><p class="price">₱150.00</p></article>
+        <article class="card" data-product-id="merch-college-jacket" data-category="Merchandise" data-price="1200"><div class="card-thumb" aria-hidden="true">CJ</div><h4>College Jacket</h4><p class="card-desc">College jacket. Choose a clothing size.</p><p class="price">₱1,200.00</p><label class="store-quantity">Size<select data-product-size aria-label="College Jacket size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+        <article class="card" data-product-id="merch-college-jersey-shirt" data-category="Merchandise" data-price="500"><div class="card-thumb" aria-hidden="true">JS</div><h4>College Jersey Shirt</h4><p class="card-desc">College jersey shirt. Choose a clothing size.</p><p class="price">₱500.00</p><label class="store-quantity">Size<select data-product-size aria-label="College Jersey Shirt size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+        <article class="card" data-product-id="merch-college-animal-stuff" data-category="Merchandise" data-price="400"><div class="card-thumb" aria-hidden="true">CA</div><h4>College Animal Stuff</h4><p class="card-desc">College animal keepsake.</p><p class="price">₱400.00</p></article>
+        <article class="card" data-product-id="merch-school-logo-keychain" data-category="Merchandise" data-price="100"><div class="card-thumb" aria-hidden="true">KC</div><h4>School Logo Keychain</h4><p class="card-desc">Keychain with the school logo.</p><p class="price">₱100.00</p></article>
+    </div>
+</main>
+<script src="../sidebar.js"></script>
+<script src="../student-store.js"></script>
+</body>
+</html>

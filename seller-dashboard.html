@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seller Workspace - School Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="seller-page">
+    <button class="seller-mobile-menu" id="sellerMenuButton" type="button" aria-label="Open seller navigation" aria-controls="sellerSidebar" aria-expanded="false">☰</button>
+    <aside class="seller-sidebar" id="sellerSidebar" aria-label="Seller navigation">
+        <a class="seller-brand" href="#overview" data-section="overview">
+            <span class="seller-brand-mark" aria-hidden="true">SC</span>
+            <span><strong>Seller Center</strong><small>Store workspace</small></span>
+        </a>
+        <nav class="seller-nav">
+            <button type="button" class="seller-nav-link active" data-section="overview"><span aria-hidden="true">◫</span> Overview</button>
+            <button type="button" class="seller-nav-link" data-section="products"><span aria-hidden="true">▤</span> Manage products</button>
+            <button type="button" class="seller-nav-link" data-section="orders"><span aria-hidden="true">▣</span> Orders</button>
+            <button type="button" class="seller-nav-link" data-section="profile"><span aria-hidden="true">◉</span> Seller profile</button>
+        </nav>
+        <button class="seller-logout" type="button" id="sellerLogout">↪ <span>Log out</span></button>
+    </aside>
+
+    <main class="seller-main">
+        <header class="seller-topbar">
+            <span class="seller-topbar-label">Seller workspace</span>
+            <div class="seller-account-chip"><span class="seller-avatar-small">JL</span><span id="topbarSellerName">Jordan Lee</span></div>
+        </header>
+
+        <section class="seller-section active" id="overview" aria-labelledby="overviewTitle">
+            <div class="seller-page-heading">
+                <div><p class="seller-eyebrow">STORE OVERVIEW</p><h1 id="overviewTitle">Welcome back, <span id="welcomeSellerName">Jordan</span></h1><p class="seller-subtitle">Here’s the latest activity from your store.</p></div>
+                <button class="seller-primary-button" type="button" data-go-section="products" data-add-product>＋ Add product</button>
+            </div>
+
+            <div class="seller-metrics">
+                <article class="seller-metric"><span class="metric-icon metric-icon-green" aria-hidden="true">▤</span><p>Total products</p><strong id="totalProducts">0</strong><small>Active listings in your store</small></article>
+                <article class="seller-metric"><span class="metric-icon metric-icon-gold" aria-hidden="true">▣</span><p>Total orders</p><strong id="totalOrders">0</strong><small>Sample customer orders</small></article>
+                <article class="seller-metric"><span class="metric-icon metric-icon-coral" aria-hidden="true">↗</span><p>Sales summary</p><strong id="salesTotal">₱0.00</strong><small>Across all sample orders</small></article>
+            </div>
+
+            <div class="seller-panel seller-sales-panel">
+                <div class="seller-panel-heading"><div><p class="seller-eyebrow">SALES SUMMARY</p><h2>Order performance</h2></div><span class="seller-period">Sample data</span></div>
+                <div class="seller-sales-summary"><div><span>Completed sales</span><strong id="completedSales">₱0.00</strong></div><div><span>Pending orders</span><strong id="pendingOrders">0</strong></div><div><span>Average order</span><strong id="averageOrder">₱0.00</strong></div></div>
+                <div class="seller-sales-track" aria-label="Completed sales compared with total sample sales"><span id="salesProgress"></span></div>
+            </div>
+
+            <div class="seller-panel">
+                <div class="seller-panel-heading"><div><p class="seller-eyebrow">RECENT ACTIVITY</p><h2>Latest orders</h2></div><button class="seller-text-button" type="button" data-go-section="orders">View all orders →</button></div>
+                <div class="seller-order-list" id="recentOrders"></div>
+            </div>
+        </section>
+
+        <section class="seller-section" id="products" aria-labelledby="productsTitle" hidden>
+            <div class="seller-page-heading seller-catalog-actions"><div><p class="seller-eyebrow">CATALOG</p><h1 id="productsTitle">Manage products</h1><p class="seller-subtitle">Add and maintain the products listed in your store.</p></div><button class="seller-primary-button" type="button" data-add-product>＋ Add product</button></div>
+            <div class="seller-panel">
+                <div class="seller-panel-heading"><div><p class="seller-eyebrow">YOUR CATALOG</p><h2>Product list <span class="seller-count" id="productCount">0</span></h2></div></div>
+                <div class="seller-table-wrap"><table class="seller-table"><thead><tr><th>Product</th><th>Price</th><th>Category</th><th>Stock</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="productRows"></tbody></table></div>
+                <p class="seller-empty-state" id="emptyProducts" hidden>No products yet. Add your first product using the form above.</p>
+            </div>
+        </section>
+
+        <section class="seller-section" id="orders" aria-labelledby="ordersTitle" hidden>
+            <div class="seller-page-heading"><div><p class="seller-eyebrow">FULFILLMENT</p><h1 id="ordersTitle">Customer orders</h1><p class="seller-subtitle">Sample orders and their current status.</p></div></div>
+            <div class="seller-panel"><div class="seller-panel-heading"><div><p class="seller-eyebrow">ORDER ACTIVITY</p><h2>All orders</h2></div><span class="seller-period">Demo orders</span></div><div class="seller-order-list" id="allOrders"></div></div>
+        </section>
+
+        <section class="seller-section" id="profile" aria-labelledby="profileTitle" hidden>
+            <div class="seller-page-heading"><div><p class="seller-eyebrow">ACCOUNT</p><h1 id="profileTitle">Seller profile</h1><p class="seller-subtitle">Your store contact information.</p></div></div>
+            <div class="profile-card seller-profile-card">
+                <div class="profile-avatar" aria-hidden="true">JL</div>
+                <div class="profile-details">
+                    <div class="detail-row"><span class="detail-label">Seller name</span><span id="detailSellerName">Jordan Lee</span></div>
+                    <div class="detail-row"><span class="detail-label">Store name</span><span id="detailStoreName">Campus Corner</span></div>
+                    <div class="detail-row"><span class="detail-label">Email address</span><span id="detailSellerEmail">hello@campuscorner.example</span></div>
+                    <div class="detail-row"><span class="detail-label">Contact information</span><span id="detailSellerContact">(555) 014-2024</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="seller-mobile-overlay" id="sellerMobileOverlay"></div>
+    <dialog class="seller-logout-dialog" id="sellerLogoutDialog" aria-labelledby="sellerLogoutTitle">
+        <h2 id="sellerLogoutTitle">Log out?</h2>
+        <p>Are you sure you want to end your seller session?</p>
+        <div class="seller-dialog-actions">
+            <button class="seller-secondary-button" type="button" id="cancelSellerLogout">Cancel</button>
+            <button class="seller-primary-button" type="button" id="confirmSellerLogout">Log out</button>
+        </div>
+    </dialog>
+    <dialog class="seller-logout-dialog seller-product-dialog" id="sellerProductDialog" aria-labelledby="productFormTitle">
+        <div class="seller-panel-heading"><div><p class="seller-eyebrow" id="productFormEyebrow">NEW LISTING</p><h2 id="productFormTitle">Add a product</h2></div></div>
+        <form id="productForm" class="seller-product-form">
+            <input type="hidden" id="productId">
+            <label>Product name<input type="text" id="productName" placeholder="e.g. Campus hoodie" required maxlength="80"></label>
+            <label>Price (₱)<input type="number" id="productPrice" min="0.01" step="0.01" placeholder="0.00" required></label>
+            <label>Category<input type="text" id="productCategory" placeholder="e.g. Apparel" required maxlength="50"></label>
+            <label>Stock / quantity<input type="number" id="productStock" min="0" step="1" placeholder="0" required></label>
+            <div class="seller-form-actions"><button class="seller-primary-button" type="submit" id="productSubmitButton">Save product</button><button class="seller-secondary-button" type="button" id="cancelProductEdit">Cancel</button></div>
+        </form>
+    </dialog>
+    <dialog class="seller-logout-dialog" id="sellerDeleteDialog" aria-labelledby="sellerDeleteTitle">
+        <h2 id="sellerDeleteTitle">Delete product?</h2>
+        <p id="sellerDeleteMessage">This product will be removed from your catalog.</p>
+        <div class="seller-dialog-actions"><button class="seller-secondary-button" type="button" id="cancelProductDelete">Cancel</button><button class="seller-delete-confirm" type="button" id="confirmProductDelete">Delete product</button></div>
+    </dialog>
+    <script src="seller-dashboard.js"></script>
+</body>
+</html>

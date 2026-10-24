@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PE Uniforms | UoT Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-B5jNofEK.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DPpiL02l.css">
+</head>
+<body class="portal-page">
+<button class="menu-toggle" id="studentMenuToggle" onclick="toggleSidebar()" aria-label="Open student navigation" aria-expanded="false">&#9776;</button>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header"><img src="/assets/UoTlogo-DIDB5NdE.png" alt="Logo" width="36" /><span>UoT Portal</span></div>
+    <ul class="sidebar-menu">
+        <li class="menu-group"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">Student</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="../dashboard.html">Home</a></li><li><a href="profile.html">Profile</a></li><li><a href="settings.html">Settings</a></li></ul></li>
+        <li class="menu-group active"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">College Store</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="products.html">Products</a></li><li><a href="categories.html">Categories</a></li></ul></li>
+        <li class="menu-group"><div class="group-title" onclick="toggleSubmenu(this)"><span class="group-title-label">Shopping</span><span class="arrow">&#9662;</span></div><ul class="submenu"><li><a href="cart.html">Cart</a></li><li><a href="myorders.html">My Orders</a></li><li><a href="wishlist.html">Wishlist</a></li></ul></li>
+        <li class="menu-group single"><a href="#" onclick="logout(); return false;">Log Out</a></li>
+    </ul>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<main class="page-content">
+    <header class="content-header"><h1>PE Uniforms</h1><p class="subtitle">Choose your PE uniform item and size.</p></header>
+    <div class="card-grid">
+        <article class="card" data-product-id="pe-jersey" data-category="PE Uniforms" data-price="400"><div class="card-thumb" aria-hidden="true">PJ</div><h4>PE Jersey</h4><p class="card-desc">PE jersey. Choose a clothing size.</p><p class="price">₱400.00</p><label class="store-quantity">Size<select data-product-size aria-label="PE Jersey size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+        <article class="card" data-product-id="pe-uniform-set" data-category="PE Uniforms" data-price="650"><div class="card-thumb" aria-hidden="true">PS</div><h4>PE Uniform Set</h4><p class="card-desc">PE uniform set. Choose a clothing size.</p><p class="price">₱650.00</p><label class="store-quantity">Size<select data-product-size aria-label="PE Uniform Set size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+        <article class="card" data-product-id="pe-jogging-pants" data-category="PE Uniforms" data-price="500"><div class="card-thumb" aria-hidden="true">JP</div><h4>PE Jogging Pants</h4><p class="card-desc">PE jogging pants. Choose a waist size.</p><p class="price">₱500.00</p><label class="store-quantity">Waist size<select data-product-size aria-label="PE Jogging Pants waist size" required><option value="" selected disabled>Select a waist size</option><option>28</option><option>30</option><option>32</option><option>34</option><option>36</option><option>38</option><option>40</option></select></label></article>
+        <article class="card" data-product-id="pe-sports-shorts" data-category="PE Uniforms" data-price="300"><div class="card-thumb" aria-hidden="true">SS</div><h4>PE Sports Shorts</h4><p class="card-desc">PE sports shorts. Choose a clothing size.</p><p class="price">₱300.00</p><label class="store-quantity">Size<select data-product-size aria-label="PE Sports Shorts size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+        <article class="card" data-product-id="pe-shirt" data-category="PE Uniforms" data-price="350"><div class="card-thumb" aria-hidden="true">PS</div><h4>PE Shirt</h4><p class="card-desc">PE shirt. Choose a clothing size.</p><p class="price">₱350.00</p><label class="store-quantity">Size<select data-product-size aria-label="PE Shirt size" required><option value="" selected disabled>Select a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></article>
+    </div>
+</main>
+<script src="../sidebar.js"></script>
+<script src="../student-store.js"></script>
+</body>
+</html>
