@@ -65,7 +65,13 @@ function money(amount) {
   return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(Number(amount) || 0);
 }
 
-function getScreen(path) {
+function getScreen(path, search = '') {
+  const requestedScreen = new URLSearchParams(search).get('screen');
+  if (requestedScreen) {
+    const supportedScreens = ['login', 'signup', 'seller-signup', 'forgot', 'seller', 'categories', 'uniforms', 'cart', 'orders', 'profile', 'settings', 'wishlist', 'logout', 'dashboard', 'products'];
+    return supportedScreens.includes(requestedScreen) ? requestedScreen : 'products';
+  }
+
   const file = path.split('/').pop();
   if (file === 'website.html' || file === '') return 'login';
   if (file === 'signup.html') return 'signup';
@@ -84,8 +90,15 @@ function getScreen(path) {
   return 'products';
 }
 
+function reactAppHref(href) {
+  const target = new URL(href, window.location.origin);
+  const params = new URLSearchParams(target.search);
+  params.set('screen', getScreen(target.pathname));
+  return `/react-app.html?${params.toString()}`;
+}
+
 function App() {
-  const screen = getScreen(window.location.pathname);
+  const screen = getScreen(window.location.pathname, window.location.search);
   const account = new URLSearchParams(window.location.search).get('account');
   const isAuth = ['login', 'signup', 'seller-signup', 'forgot'].includes(screen);
   useEffect(() => {
@@ -126,10 +139,10 @@ function Login({ initialSeller }) {
     setError('');
     if (seller) {
       sessionStorage.setItem('sellerId', accountId);
-      window.location.href = '/seller-dashboard.html';
+      window.location.href = reactAppHref('/seller-dashboard.html');
     } else {
       sessionStorage.setItem('studentId', accountId);
-      window.location.href = '/dashboard.html';
+      window.location.href = reactAppHref('/dashboard.html');
     }
   };
 
@@ -145,8 +158,8 @@ function Login({ initialSeller }) {
       {error && <Alert variant="danger">{error}</Alert>}
       <Button className="w-100 auth-submit" type="submit">{seller ? 'Sign in to Seller Center' : 'Log in'}</Button>
     </Form>
-    <p className="auth-foot"><a href={`/forgotpass.html${seller ? '?account=seller' : ''}`}>Forgot password?</a></p>
-    <p className="auth-foot">{seller ? <>New seller? <a href="/seller-signup.html">Create a seller account</a></> : <>New to the portal? <a href="/signup.html">Create an account</a></>}</p>
+    <p className="auth-foot"><a href={reactAppHref(`/forgotpass.html${seller ? '?account=seller' : ''}`)}>Forgot password?</a></p>
+    <p className="auth-foot">{seller ? <>New seller? <a href={reactAppHref('/seller-signup.html')}>Create a seller account</a></> : <>New to the portal? <a href={reactAppHref('/signup.html')}>Create an account</a></>}</p>
   </AuthFrame>;
 }
 
@@ -157,7 +170,7 @@ function StudentSignup() {
     event.preventDefault();
     if (event.currentTarget.password.value !== event.currentTarget.confirm.value) return setError('Passwords do not match.');
     setError('');
-    window.location.href = '/website.html';
+    window.location.href = reactAppHref('/website.html');
   }
   return <AuthFrame><p className="eyebrow">GET STARTED</p><h1>Create account</h1><Form onSubmit={submit}>
     <Form.Group className="mb-3"><Form.Label>Full name</Form.Label><Form.Control name="name" required /></Form.Group>
@@ -167,7 +180,7 @@ function StudentSignup() {
     <Form.Group className="mb-2"><Form.Label>Confirm password</Form.Label><Form.Control name="confirm" type={show ? 'text' : 'password'} required /></Form.Group>
     <Form.Check className="mb-3" label="Show passwords" checked={show} onChange={event => setShow(event.target.checked)} />
     {error && <Alert variant="danger">{error}</Alert>}<Button className="w-100 auth-submit" type="submit">Create account</Button>
-  </Form><p className="auth-foot">Already registered? <a href="/website.html">Log in</a></p></AuthFrame>;
+  </Form><p className="auth-foot">Already registered? <a href={reactAppHref('/website.html')}>Log in</a></p></AuthFrame>;
 }
 
 function SellerSignup() {
@@ -188,7 +201,7 @@ function SellerSignup() {
     <Form.Check className="mb-3" label="Show passwords" checked={show} onChange={event => setShow(event.target.checked)} />
     {message && <Alert variant={message.startsWith('Passwords') ? 'danger' : 'info'}>{message}</Alert>}
     <Button className="w-100 auth-submit" type="submit">Create seller account</Button>
-  </Form><p className="auth-foot"><a href="/website.html?account=seller">Back to seller sign in</a></p></AuthFrame>;
+  </Form><p className="auth-foot"><a href={reactAppHref('/website.html?account=seller')}>Back to seller sign in</a></p></AuthFrame>;
 }
 
 function ForgotPassword({ seller }) {
@@ -198,7 +211,7 @@ function ForgotPassword({ seller }) {
       {!seller && <Form.Group className="mb-3"><Form.Label>ID number</Form.Label><Form.Control pattern="[0-9]{9}" maxLength={9} required /></Form.Group>}
       <Form.Group className="mb-3"><Form.Label>Email address</Form.Label><Form.Control type="email" required /></Form.Group>
       {message && <Alert variant="info">{message}</Alert>}<Button className="w-100 auth-submit" type="submit">Request help</Button>
-    </Form><p className="auth-foot"><a href={`/website.html${seller ? '?account=seller' : ''}`}>Back to sign in</a></p>
+    </Form><p className="auth-foot"><a href={reactAppHref(`/website.html${seller ? '?account=seller' : ''}`)}>Back to sign in</a></p>
   </AuthFrame>;
 }
 
@@ -294,12 +307,12 @@ function StudentPortal({ screen }) {
 
 function PortalLayout({ screen, children, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const activeHref = window.location.pathname;
+  const activeScreen = getScreen(window.location.pathname, window.location.search);
   const activeGroup = screen === 'products' || screen === 'categories' || screen === 'uniforms' ? '1' : ['cart', 'orders', 'wishlist'].includes(screen) ? '2' : '0';
   const navContent = () => <>
     <div className="portal-brand"><img src="/UoTlogo.png" alt="" /><span>UoT Portal</span></div>
     <Accordion className="portal-nav-accordion" defaultActiveKey={activeGroup}>
-      {studentLinks.map((group, index) => <Accordion.Item eventKey={String(index)} key={group.title}><Accordion.Header>{group.title}</Accordion.Header><Accordion.Body><Nav className="flex-column">{group.links.map(([label, href]) => <Nav.Link key={href} href={href} active={activeHref === href || (label === 'Dashboard' && screen === 'dashboard')}>{label}</Nav.Link>)}</Nav></Accordion.Body></Accordion.Item>)}
+      {studentLinks.map((group, index) => <Accordion.Item eventKey={String(index)} key={group.title}><Accordion.Header>{group.title}</Accordion.Header><Accordion.Body><Nav className="flex-column">{group.links.map(([label, href]) => <Nav.Link key={href} href={reactAppHref(href)} active={activeScreen === getScreen(new URL(href, window.location.origin).pathname) || (label === 'Dashboard' && screen === 'dashboard')}>{label}</Nav.Link>)}</Nav></Accordion.Body></Accordion.Item>)}
     </Accordion>
     <Nav.Link as="button" type="button" className="portal-signout" onClick={() => { setMenuOpen(false); onLogout(); }}>Log out</Nav.Link>
   </>;
@@ -320,10 +333,10 @@ function PageHeading({ title, subtitle, eyebrow }) {
 function Dashboard() {
   const metrics = [['Units Enrolled', '6'], ['Average Grade', '1.75'], ['Classes Today', '3'], ['Clearance Status', '80%']];
   return <><PageHeading title="Welcome back, Student" subtitle="Your campus account at a glance." />
-    <section className="campus-banner"><div><p className="eyebrow">THIS SEMESTER</p><h2>Everything you need for campus</h2><p>Browse official products, review your cart, and follow your orders.</p><Button href="/pages/products.html">Browse store</Button></div><img src="/UoTlogo.png" alt="University of Technology" /></section>
+    <section className="campus-banner"><div><p className="eyebrow">THIS SEMESTER</p><h2>Everything you need for campus</h2><p>Browse official products, review your cart, and follow your orders.</p><Button href={reactAppHref('/pages/products.html')}>Browse store</Button></div><img src="/UoTlogo.png" alt="University of Technology" /></section>
     <SectionTitle>Quick overview</SectionTitle><Row className="g-2 promo-strip">{[['ACADEMICS', 'Next class: 1:00 PM · Data Structures'], ['ACADEMICS', '2 pending clearance items'], ['STORE', 'Store order arriving this week'], ['ACADEMICS', 'Attendance rate: 96%'], ['NOTICE', '1 unread announcement']].map(([tag, text]) => <Col sm={6} xl key={text}><div className="promo-item"><Badge>{tag}</Badge><span>{text}</span></div></Col>)}</Row>
     <SectionTitle>This week’s snapshot</SectionTitle><Row className="g-3 mb-4">{metrics.map(([label, value]) => <Col sm={6} xl={3} key={label}><Card className="portal-card metric-card"><Card.Body><span>{label}</span><strong>{value}</strong></Card.Body></Card></Col>)}</Row>
-    <SectionTitle>Student tools</SectionTitle><Row className="g-3">{[['Products', 'Browse official campus gear and supplies.', '/pages/products.html'], ['Cart', 'Review selected items before checkout.', '/pages/cart.html'], ['Profile', 'Manage your personal information.', '/pages/profile.html'], ['Wishlist', 'Keep track of products for later.', '/pages/wishlist.html']].map(([title, text, href]) => <Col sm={6} xl={3} key={title}><Card className="portal-card tool-card h-100"><Card.Body><Card.Title>{title}</Card.Title><Card.Text>{text}</Card.Text><Button href={href} variant="outline-primary">Open</Button></Card.Body></Card></Col>)}</Row>
+    <SectionTitle>Student tools</SectionTitle><Row className="g-3">{[['Products', 'Browse official campus gear and supplies.', '/pages/products.html'], ['Cart', 'Review selected items before checkout.', '/pages/cart.html'], ['Profile', 'Manage your personal information.', '/pages/profile.html'], ['Wishlist', 'Keep track of products for later.', '/pages/wishlist.html']].map(([title, text, href]) => <Col sm={6} xl={3} key={title}><Card className="portal-card tool-card h-100"><Card.Body><Card.Title>{title}</Card.Title><Card.Text>{text}</Card.Text><Button href={reactAppHref(href)} variant="outline-primary">Open</Button></Card.Body></Card></Col>)}</Row>
     <SectionTitle>Recent activity</SectionTitle><Card className="portal-card"><ListRows rows={[["Grade posted: Data Structures", 'Updated'], ['Clearance: Library', 'Pending'], ['Store order #1042', 'Ready for pickup']]} /></Card>
   </>;
 }
@@ -355,7 +368,7 @@ function ProductPage({ inventory, addToCart }) {
 
 function Categories() {
   const categories = [['Uniforms', 'College uniforms, tops, and pants.', '/pages/uniforms.html'], ['Merchandise', 'College accessories, apparel, and keepsakes.', '/pages/merchandise.html'], ['PE Uniforms', 'PE jerseys, shirts, shorts, and pants.', '/pages/pe-uniforms.html']];
-  return <><PageHeading title="Categories" subtitle="Browse the store by category." /><Row className="g-3">{categories.map(([name, description, href]) => <Col sm={6} xl={4} key={name}><Card className="portal-card category-card h-100"><Card.Body><div className="category-mark">{name.slice(0, 1)}</div><Card.Title>{name}</Card.Title><Card.Text>{description}</Card.Text><Button href={href} variant="primary">Browse</Button></Card.Body></Card></Col>)}</Row></>;
+  return <><PageHeading title="Categories" subtitle="Browse the store by category." /><Row className="g-3">{categories.map(([name, description, href]) => <Col sm={6} xl={4} key={name}><Card className="portal-card category-card h-100"><Card.Body><div className="category-mark">{name.slice(0, 1)}</div><Card.Title>{name}</Card.Title><Card.Text>{description}</Card.Text><Button href={reactAppHref(href)} variant="primary">Browse</Button></Card.Body></Card></Col>)}</Row></>;
 }
 
 function Uniforms() {
@@ -384,7 +397,7 @@ function Wishlist({ items, moveToCart }) {
   return <><PageHeading title="Wishlist" subtitle="Items you have saved for later." />{items.length ? <Row className="g-3">{items.map(item => <Col sm={6} xl={4} key={item.id}><Card className="portal-card h-100"><Card.Body><Badge bg="light" text="dark">{item.category}</Badge><Card.Title className="mt-3">{item.name}</Card.Title><Card.Text>{item.description || 'Saved for later.'}{item.size ? ` · Size: ${item.size}` : ''}</Card.Text><div className="product-buy"><strong>{money(item.price)}</strong><Button variant="outline-primary" onClick={() => moveToCart(item)}>Move to cart</Button></div></Card.Body></Card></Col>)}</Row> : <EmptyState title="Your wishlist is empty" href="/pages/products.html" action="Browse products" />}</>;
 }
 
-function EmptyState({ title, href, action }) { return <Card className="portal-card empty-state"><Card.Body><h2>{title}</h2><Button href={href}>{action}</Button></Card.Body></Card>; }
+function EmptyState({ title, href, action }) { return <Card className="portal-card empty-state"><Card.Body><h2>{title}</h2><Button href={reactAppHref(href)}>{action}</Button></Card.Body></Card>; }
 
 function Profile() {
   const [name, id] = ['Juan Dela Cruz', sessionStorage.getItem('studentId') || '2024-00123'];
@@ -392,7 +405,7 @@ function Profile() {
 }
 
 function Settings({ notify }) {
-  return <><PageHeading title="Settings" subtitle="Manage your account preferences." /><div className="settings-stack">{[['Edit profile information', 'Update your contact details and personal information.', 'Edit profile', '/pages/profile.html'], ['Change password', 'Update your account password.', 'Request help', '/forgotpass.html'], ['Notifications', 'Choose what you get notified about.', 'Manage notifications', null]].map(([title, text, action, href]) => <Card className="portal-card" key={title}><Card.Body className="settings-row"><div><Card.Title>{title}</Card.Title><Card.Text>{text}</Card.Text></div>{href ? <Button href={href} variant="outline-primary">{action}</Button> : <Button variant="outline-primary" onClick={() => notify('Notification preferences saved.')}>{action}</Button>}</Card.Body></Card>)}</div></>;
+  return <><PageHeading title="Settings" subtitle="Manage your account preferences." /><div className="settings-stack">{[['Edit profile information', 'Update your contact details and personal information.', 'Edit profile', '/pages/profile.html'], ['Change password', 'Update your account password.', 'Request help', '/forgotpass.html'], ['Notifications', 'Choose what you get notified about.', 'Manage notifications', null]].map(([title, text, action, href]) => <Card className="portal-card" key={title}><Card.Body className="settings-row"><div><Card.Title>{title}</Card.Title><Card.Text>{text}</Card.Text></div>{href ? <Button href={reactAppHref(href)} variant="outline-primary">{action}</Button> : <Button variant="outline-primary" onClick={() => notify('Notification preferences saved.')}>{action}</Button>}</Card.Body></Card>)}</div></>;
 }
 
 function LogoutDialog({ show, onHide, seller = false }) {
@@ -401,7 +414,7 @@ function LogoutDialog({ show, onHide, seller = false }) {
     <Modal.Body>Are you sure you want to end your session?</Modal.Body>
     <Modal.Footer>
       <Button variant="outline-secondary" onClick={onHide}>Cancel</Button>
-      <Button onClick={() => { sessionStorage.clear(); window.location.href = seller ? '/website.html?account=seller' : '/website.html'; }}>Log out</Button>
+      <Button onClick={() => { sessionStorage.clear(); window.location.href = reactAppHref(seller ? '/website.html?account=seller' : '/website.html'); }}>Log out</Button>
     </Modal.Footer>
   </Modal>;
 }

@@ -23,31 +23,17 @@ const pages = [
   'pages/profile.html',
   'pages/settings.html',
   'pages/wishlist.html',
-  'pages/logout.html'
+  'pages/logout.html',
+  'react-app.html'
 ];
 
 export default defineConfig({
   plugins: [
     {
-      name: 'vite-react-entry',
-      transformIndexHtml: {
-        order: 'pre',
-        handler() {
-          return {
-          tags: [{
-            tag: 'script',
-            attrs: { type: 'module', src: '/src/main.jsx' },
-            injectTo: 'body'
-          }]
-          };
-        }
-      }
-    },
-    {
       name: 'copy-classic-scripts',
       apply: 'build',
       generateBundle() {
-        for (const file of ['login.js', 'seller-dashboard.js', 'sidebar.js', 'student-store.js']) {
+        for (const file of ['forgot.js', 'login.js', 'seller-dashboard.js', 'seller-signup.js', 'signup.js', 'sidebar.js', 'student-store.js']) {
           this.emitFile({
             type: 'asset',
             fileName: file,
